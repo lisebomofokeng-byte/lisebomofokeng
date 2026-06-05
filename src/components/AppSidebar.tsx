@@ -7,6 +7,7 @@ import {
   Search,
   MessageSquare,
   Sparkles,
+  Landmark,
 } from "lucide-react";
 
 import {
@@ -29,6 +30,7 @@ const items = [
   { title: "Task Planner", url: "/tasks", icon: ListChecks },
   { title: "Research", url: "/research", icon: Search },
   { title: "AI Chatbot", url: "/chat", icon: MessageSquare },
+  { title: "Capfin Loan Bot", url: "/capfin", icon: Landmark },
 ] as const;
 
 export function AppSidebar() {
