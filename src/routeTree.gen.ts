@@ -14,8 +14,10 @@ import { Route as ResearchRouteImport } from './routes/research'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as EmailRouteImport } from './routes/email'
 import { Route as ChatRouteImport } from './routes/chat'
+import { Route as CapfinRouteImport } from './routes/capfin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiCapfinChatRouteImport } from './routes/api/capfin-chat'
 
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
@@ -42,6 +44,11 @@ const ChatRoute = ChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CapfinRoute = CapfinRouteImport.update({
+  id: '/capfin',
+  path: '/capfin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -52,72 +59,91 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCapfinChatRoute = ApiCapfinChatRouteImport.update({
+  id: '/api/capfin-chat',
+  path: '/api/capfin-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
   '/research': typeof ResearchRoute
   '/tasks': typeof TasksRoute
+  '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
   '/research': typeof ResearchRoute
   '/tasks': typeof TasksRoute
+  '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
   '/research': typeof ResearchRoute
   '/tasks': typeof TasksRoute
+  '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/capfin'
     | '/chat'
     | '/email'
     | '/meetings'
     | '/research'
     | '/tasks'
+    | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/capfin'
     | '/chat'
     | '/email'
     | '/meetings'
     | '/research'
     | '/tasks'
+    | '/api/capfin-chat'
     | '/api/chat'
   id:
     | '__root__'
     | '/'
+    | '/capfin'
     | '/chat'
     | '/email'
     | '/meetings'
     | '/research'
     | '/tasks'
+    | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CapfinRoute: typeof CapfinRoute
   ChatRoute: typeof ChatRoute
   EmailRoute: typeof EmailRoute
   MeetingsRoute: typeof MeetingsRoute
   ResearchRoute: typeof ResearchRoute
   TasksRoute: typeof TasksRoute
+  ApiCapfinChatRoute: typeof ApiCapfinChatRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
@@ -158,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/capfin': {
+      id: '/capfin'
+      path: '/capfin'
+      fullPath: '/capfin'
+      preLoaderRoute: typeof CapfinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -172,16 +205,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/capfin-chat': {
+      id: '/api/capfin-chat'
+      path: '/api/capfin-chat'
+      fullPath: '/api/capfin-chat'
+      preLoaderRoute: typeof ApiCapfinChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CapfinRoute: CapfinRoute,
   ChatRoute: ChatRoute,
   EmailRoute: EmailRoute,
   MeetingsRoute: MeetingsRoute,
   ResearchRoute: ResearchRoute,
   TasksRoute: TasksRoute,
+  ApiCapfinChatRoute: ApiCapfinChatRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
