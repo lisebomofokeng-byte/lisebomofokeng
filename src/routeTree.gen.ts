@@ -21,6 +21,7 @@ import { Route as BookRouteImport } from './routes/book'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiCapfinChatRouteImport } from './routes/api/capfin-chat'
+import { Route as AdminCalendarRouteImport } from './routes/admin.calendar'
 
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
@@ -82,6 +83,11 @@ const ApiCapfinChatRoute = ApiCapfinChatRouteImport.update({
   path: '/api/capfin-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCalendarRoute = AdminCalendarRouteImport.update({
+  id: '/admin/calendar',
+  path: '/admin/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/research': typeof ResearchRoute
   '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/admin/calendar': typeof AdminCalendarRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchRoute
   '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/admin/calendar': typeof AdminCalendarRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/research': typeof ResearchRoute
   '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/admin/calendar': typeof AdminCalendarRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/services'
     | '/tasks'
+    | '/admin/calendar'
     | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/services'
     | '/tasks'
+    | '/admin/calendar'
     | '/api/capfin-chat'
     | '/api/chat'
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/services'
     | '/tasks'
+    | '/admin/calendar'
     | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesById: FileRoutesById
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   ResearchRoute: typeof ResearchRoute
   ServicesRoute: typeof ServicesRoute
   TasksRoute: typeof TasksRoute
+  AdminCalendarRoute: typeof AdminCalendarRoute
   ApiCapfinChatRoute: typeof ApiCapfinChatRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCapfinChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/calendar': {
+      id: '/admin/calendar'
+      path: '/admin/calendar'
+      fullPath: '/admin/calendar'
+      preLoaderRoute: typeof AdminCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -286,6 +306,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResearchRoute: ResearchRoute,
   ServicesRoute: ServicesRoute,
   TasksRoute: TasksRoute,
+  AdminCalendarRoute: AdminCalendarRoute,
   ApiCapfinChatRoute: ApiCapfinChatRoute,
   ApiChatRoute: ApiChatRoute,
 }
