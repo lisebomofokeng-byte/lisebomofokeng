@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as MyAppointmentsRouteImport } from './routes/my-appointments'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as EmailRouteImport } from './routes/email'
 import { Route as ChatRouteImport } from './routes/chat'
@@ -28,6 +29,11 @@ const TasksRoute = TasksRouteImport.update({
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
   path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyAppointmentsRoute = MyAppointmentsRouteImport.update({
+  id: '/my-appointments',
+  path: '/my-appointments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingsRoute = MeetingsRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
+  '/my-appointments': typeof MyAppointmentsRoute
   '/research': typeof ResearchRoute
   '/tasks': typeof TasksRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
+  '/my-appointments': typeof MyAppointmentsRoute
   '/research': typeof ResearchRoute
   '/tasks': typeof TasksRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
+  '/my-appointments': typeof MyAppointmentsRoute
   '/research': typeof ResearchRoute
   '/tasks': typeof TasksRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/email'
     | '/meetings'
+    | '/my-appointments'
     | '/research'
     | '/tasks'
     | '/api/capfin-chat'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/email'
     | '/meetings'
+    | '/my-appointments'
     | '/research'
     | '/tasks'
     | '/api/capfin-chat'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/email'
     | '/meetings'
+    | '/my-appointments'
     | '/research'
     | '/tasks'
     | '/api/capfin-chat'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   EmailRoute: typeof EmailRoute
   MeetingsRoute: typeof MeetingsRoute
+  MyAppointmentsRoute: typeof MyAppointmentsRoute
   ResearchRoute: typeof ResearchRoute
   TasksRoute: typeof TasksRoute
   ApiCapfinChatRoute: typeof ApiCapfinChatRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/research'
       fullPath: '/research'
       preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-appointments': {
+      id: '/my-appointments'
+      path: '/my-appointments'
+      fullPath: '/my-appointments'
+      preLoaderRoute: typeof MyAppointmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meetings': {
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   EmailRoute: EmailRoute,
   MeetingsRoute: MeetingsRoute,
+  MyAppointmentsRoute: MyAppointmentsRoute,
   ResearchRoute: ResearchRoute,
   TasksRoute: TasksRoute,
   ApiCapfinChatRoute: ApiCapfinChatRoute,
