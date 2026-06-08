@@ -1,13 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
-  LayoutDashboard,
-  Mail,
-  FileText,
-  ListChecks,
-  Search,
-  MessageSquare,
+  CalendarPlus,
+  CalendarCheck,
+  Scissors,
+  CalendarRange,
+  Users,
+  UserCog,
+  Bell,
   Sparkles,
-  Landmark,
+  LayoutDashboard,
 } from "lucide-react";
 
 import {
@@ -23,14 +24,18 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 
-const items = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Email Generator", url: "/email", icon: Mail },
-  { title: "Meeting Notes", url: "/meetings", icon: FileText },
-  { title: "Task Planner", url: "/tasks", icon: ListChecks },
-  { title: "Research", url: "/research", icon: Search },
-  { title: "AI Chatbot", url: "/chat", icon: MessageSquare },
-  { title: "Capfin Loan Bot", url: "/capfin", icon: Landmark },
+const clientItems = [
+  { title: "Overview", url: "/", icon: LayoutDashboard },
+  { title: "Book Appointment", url: "/book", icon: CalendarPlus },
+  { title: "My Appointments", url: "/my-appointments", icon: CalendarCheck },
+  { title: "Services & Pricing", url: "/services", icon: Scissors },
+] as const;
+
+const adminItems = [
+  { title: "Calendar Grid", url: "/admin/calendar", icon: CalendarRange },
+  { title: "Client Database", url: "/admin/clients", icon: Users },
+  { title: "Stylist Schedules", url: "/admin/stylists", icon: UserCog },
+  { title: "Notifications", url: "/admin/notifications", icon: Bell },
 ] as const;
 
 export function AppSidebar() {
@@ -44,22 +49,39 @@ export function AppSidebar() {
         <div className="flex items-center gap-2 px-2 py-3">
           <div
             className="flex h-9 w-9 items-center justify-center rounded-lg text-primary-foreground shadow-[var(--shadow-elegant)]"
-            style={{ background: "var(--gradient-primary)" }}
+            style={{ background: "var(--gradient-gold)" }}
           >
             <Sparkles className="h-5 w-5" />
           </div>
           <div className="flex flex-col leading-tight group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold">Workplace AI</span>
-            <span className="text-xs text-muted-foreground">Productivity Suite</span>
+            <span className="text-sm font-semibold tracking-wide">AURA</span>
+            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Salon Booking</span>
           </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+          <SidebarGroupLabel>Client</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {clientItems.map((item) => (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={item.title}>
+                    <Link to={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Admin / Stylist</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {adminItems.map((item) => (
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={item.title}>
                     <Link to={item.url}>
@@ -75,7 +97,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter className="border-t">
         <p className="px-2 py-2 text-[10px] leading-snug text-muted-foreground group-data-[collapsible=icon]:hidden">
-          AI outputs may be inaccurate. Always review before sharing.
+          Estimated durations and stylist matching are optimized by AI. Please review final details before confirming.
         </p>
       </SidebarFooter>
     </Sidebar>

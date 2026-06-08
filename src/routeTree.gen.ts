@@ -10,23 +10,40 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as MyAppointmentsRouteImport } from './routes/my-appointments'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as EmailRouteImport } from './routes/email'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CapfinRouteImport } from './routes/capfin'
+import { Route as BookRouteImport } from './routes/book'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiCapfinChatRouteImport } from './routes/api/capfin-chat'
+import { Route as AdminStylistsRouteImport } from './routes/admin.stylists'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminClientsRouteImport } from './routes/admin.clients'
+import { Route as AdminCalendarRouteImport } from './routes/admin.calendar'
 
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
   path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyAppointmentsRoute = MyAppointmentsRouteImport.update({
+  id: '/my-appointments',
+  path: '/my-appointments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingsRoute = MeetingsRouteImport.update({
@@ -49,6 +66,11 @@ const CapfinRoute = CapfinRouteImport.update({
   path: '/capfin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -64,38 +86,79 @@ const ApiCapfinChatRoute = ApiCapfinChatRouteImport.update({
   path: '/api/capfin-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStylistsRoute = AdminStylistsRouteImport.update({
+  id: '/admin/stylists',
+  path: '/admin/stylists',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/admin/notifications',
+  path: '/admin/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminClientsRoute = AdminClientsRouteImport.update({
+  id: '/admin/clients',
+  path: '/admin/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCalendarRoute = AdminCalendarRouteImport.update({
+  id: '/admin/calendar',
+  path: '/admin/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
   '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
+  '/my-appointments': typeof MyAppointmentsRoute
   '/research': typeof ResearchRoute
+  '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/admin/calendar': typeof AdminCalendarRoute
+  '/admin/clients': typeof AdminClientsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/stylists': typeof AdminStylistsRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
   '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
+  '/my-appointments': typeof MyAppointmentsRoute
   '/research': typeof ResearchRoute
+  '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/admin/calendar': typeof AdminCalendarRoute
+  '/admin/clients': typeof AdminClientsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/stylists': typeof AdminStylistsRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
   '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
   '/email': typeof EmailRoute
   '/meetings': typeof MeetingsRoute
+  '/my-appointments': typeof MyAppointmentsRoute
   '/research': typeof ResearchRoute
+  '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/admin/calendar': typeof AdminCalendarRoute
+  '/admin/clients': typeof AdminClientsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/stylists': typeof AdminStylistsRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -103,46 +166,74 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/book'
     | '/capfin'
     | '/chat'
     | '/email'
     | '/meetings'
+    | '/my-appointments'
     | '/research'
+    | '/services'
     | '/tasks'
+    | '/admin/calendar'
+    | '/admin/clients'
+    | '/admin/notifications'
+    | '/admin/stylists'
     | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/book'
     | '/capfin'
     | '/chat'
     | '/email'
     | '/meetings'
+    | '/my-appointments'
     | '/research'
+    | '/services'
     | '/tasks'
+    | '/admin/calendar'
+    | '/admin/clients'
+    | '/admin/notifications'
+    | '/admin/stylists'
     | '/api/capfin-chat'
     | '/api/chat'
   id:
     | '__root__'
     | '/'
+    | '/book'
     | '/capfin'
     | '/chat'
     | '/email'
     | '/meetings'
+    | '/my-appointments'
     | '/research'
+    | '/services'
     | '/tasks'
+    | '/admin/calendar'
+    | '/admin/clients'
+    | '/admin/notifications'
+    | '/admin/stylists'
     | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookRoute: typeof BookRoute
   CapfinRoute: typeof CapfinRoute
   ChatRoute: typeof ChatRoute
   EmailRoute: typeof EmailRoute
   MeetingsRoute: typeof MeetingsRoute
+  MyAppointmentsRoute: typeof MyAppointmentsRoute
   ResearchRoute: typeof ResearchRoute
+  ServicesRoute: typeof ServicesRoute
   TasksRoute: typeof TasksRoute
+  AdminCalendarRoute: typeof AdminCalendarRoute
+  AdminClientsRoute: typeof AdminClientsRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminStylistsRoute: typeof AdminStylistsRoute
   ApiCapfinChatRoute: typeof ApiCapfinChatRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -156,11 +247,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/research': {
       id: '/research'
       path: '/research'
       fullPath: '/research'
       preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-appointments': {
+      id: '/my-appointments'
+      path: '/my-appointments'
+      fullPath: '/my-appointments'
+      preLoaderRoute: typeof MyAppointmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meetings': {
@@ -191,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CapfinRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -212,17 +324,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCapfinChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/stylists': {
+      id: '/admin/stylists'
+      path: '/admin/stylists'
+      fullPath: '/admin/stylists'
+      preLoaderRoute: typeof AdminStylistsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/admin/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/clients': {
+      id: '/admin/clients'
+      path: '/admin/clients'
+      fullPath: '/admin/clients'
+      preLoaderRoute: typeof AdminClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/calendar': {
+      id: '/admin/calendar'
+      path: '/admin/calendar'
+      fullPath: '/admin/calendar'
+      preLoaderRoute: typeof AdminCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookRoute: BookRoute,
   CapfinRoute: CapfinRoute,
   ChatRoute: ChatRoute,
   EmailRoute: EmailRoute,
   MeetingsRoute: MeetingsRoute,
+  MyAppointmentsRoute: MyAppointmentsRoute,
   ResearchRoute: ResearchRoute,
+  ServicesRoute: ServicesRoute,
   TasksRoute: TasksRoute,
+  AdminCalendarRoute: AdminCalendarRoute,
+  AdminClientsRoute: AdminClientsRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminStylistsRoute: AdminStylistsRoute,
   ApiCapfinChatRoute: ApiCapfinChatRoute,
   ApiChatRoute: ApiChatRoute,
 }
