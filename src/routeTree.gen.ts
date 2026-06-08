@@ -22,6 +22,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiCapfinChatRouteImport } from './routes/api/capfin-chat'
 import { Route as AdminStylistsRouteImport } from './routes/admin.stylists'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
 import { Route as AdminClientsRouteImport } from './routes/admin.clients'
 import { Route as AdminCalendarRouteImport } from './routes/admin.calendar'
 
@@ -90,6 +91,11 @@ const AdminStylistsRoute = AdminStylistsRouteImport.update({
   path: '/admin/stylists',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/admin/notifications',
+  path: '/admin/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminClientsRoute = AdminClientsRouteImport.update({
   id: '/admin/clients',
   path: '/admin/clients',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof TasksRoute
   '/admin/calendar': typeof AdminCalendarRoute
   '/admin/clients': typeof AdminClientsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/stylists': typeof AdminStylistsRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof TasksRoute
   '/admin/calendar': typeof AdminCalendarRoute
   '/admin/clients': typeof AdminClientsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/stylists': typeof AdminStylistsRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/tasks': typeof TasksRoute
   '/admin/calendar': typeof AdminCalendarRoute
   '/admin/clients': typeof AdminClientsRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/stylists': typeof AdminStylistsRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/admin/calendar'
     | '/admin/clients'
+    | '/admin/notifications'
     | '/admin/stylists'
     | '/api/capfin-chat'
     | '/api/chat'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/admin/calendar'
     | '/admin/clients'
+    | '/admin/notifications'
     | '/admin/stylists'
     | '/api/capfin-chat'
     | '/api/chat'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/admin/calendar'
     | '/admin/clients'
+    | '/admin/notifications'
     | '/admin/stylists'
     | '/api/capfin-chat'
     | '/api/chat'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   TasksRoute: typeof TasksRoute
   AdminCalendarRoute: typeof AdminCalendarRoute
   AdminClientsRoute: typeof AdminClientsRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
   AdminStylistsRoute: typeof AdminStylistsRoute
   ApiCapfinChatRoute: typeof ApiCapfinChatRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -318,6 +331,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminStylistsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/admin/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/clients': {
       id: '/admin/clients'
       path: '/admin/clients'
@@ -348,6 +368,7 @@ const rootRouteChildren: RootRouteChildren = {
   TasksRoute: TasksRoute,
   AdminCalendarRoute: AdminCalendarRoute,
   AdminClientsRoute: AdminClientsRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
   AdminStylistsRoute: AdminStylistsRoute,
   ApiCapfinChatRoute: ApiCapfinChatRoute,
   ApiChatRoute: ApiChatRoute,
