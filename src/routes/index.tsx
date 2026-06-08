@@ -1,117 +1,77 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Mail,
-  FileText,
-  ListChecks,
-  Search,
-  MessageSquare,
-  ArrowRight,
-  Sparkles,
-  ShieldAlert,
-} from "lucide-react";
+import { CalendarPlus, CalendarCheck, Scissors, CalendarRange, ArrowRight, Sparkles } from "lucide-react";
+import { ResponsibleAiNote } from "@/components/ResponsibleAiNote";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AI Workplace Productivity Assistant" },
-      {
-        name: "description",
-        content:
-          "Automate emails, meeting notes, planning, research, and chat with an AI assistant built for professionals.",
-      },
+      { title: "Aura Salon Booking Platform" },
+      { name: "description", content: "Book premium salon services with master stylists. Modern, elegant, and effortless." },
     ],
   }),
-  component: Dashboard,
+  component: Overview,
 });
 
-const features = [
-  {
-    title: "Smart Email Generator",
-    description: "Draft polished, on-tone emails in seconds from a few notes.",
-    icon: Mail,
-    href: "/email",
-  },
-  {
-    title: "Meeting Notes Summarizer",
-    description: "Turn raw notes or transcripts into decisions and action items.",
-    icon: FileText,
-    href: "/meetings",
-  },
-  {
-    title: "AI Task Planner",
-    description: "Break goals into prioritized milestones and a daily plan.",
-    icon: ListChecks,
-    href: "/tasks",
-  },
-  {
-    title: "AI Research Assistant",
-    description: "Get structured briefings on any workplace topic.",
-    icon: Search,
-    href: "/research",
-  },
-  {
-    title: "AI Chatbot",
-    description: "Ask anything — brainstorm, draft, or troubleshoot in chat.",
-    icon: MessageSquare,
-    href: "/chat",
-  },
-] as const;
+const tiles = [
+  { title: "Book Appointment", description: "Step-by-step guided booking with your favorite stylist.", icon: CalendarPlus, href: "/book" as const, primary: true },
+  { title: "My Appointments", description: "Track upcoming visits, reschedule or cancel with one tap.", icon: CalendarCheck, href: "/my-appointments" as const },
+  { title: "Services & Pricing", description: "Browse our full menu of cuts, color and treatments.", icon: Scissors, href: "/services" as const },
+  { title: "Admin Calendar", description: "Staff view — daily grid, occupancy and revenue.", icon: CalendarRange, href: "/admin/calendar" as const },
+];
 
-function Dashboard() {
+function Overview() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <section
-        className="overflow-hidden rounded-2xl border p-8 shadow-[var(--shadow-soft)]"
-        style={{ background: "var(--gradient-subtle)" }}
+        className="relative overflow-hidden rounded-3xl border p-10 shadow-[var(--shadow-elegant)]"
+        style={{ background: "linear-gradient(135deg, oklch(0.18 0.02 250), oklch(0.26 0.03 250))" }}
       >
-        <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary">
-          <Sparkles className="h-3.5 w-3.5" /> Your AI productivity suite
+        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
+        <div className="relative">
+          <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em]" style={{ color: "var(--gold)" }}>
+            <Sparkles className="h-3.5 w-3.5" /> Premium hair salon
+          </div>
+          <h1 className="mt-4 max-w-2xl font-serif text-4xl font-light leading-tight text-primary-foreground sm:text-5xl">
+            Effortless booking. Unforgettable style.
+          </h1>
+          <p className="mt-4 max-w-xl text-sm text-primary-foreground/70 sm:text-base">
+            Reserve your seat with our master colorists, barbers and stylists in a few elegant steps.
+          </p>
+          <Link
+            to="/book"
+            className="mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium shadow-lg transition-transform hover:-translate-y-0.5"
+            style={{ background: "var(--gradient-gold)", color: "var(--gold-foreground)" }}
+          >
+            Book your appointment <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
-        <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl">
-          Automate the busywork. Focus on the work that matters.
-        </h1>
-        <p className="mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
-          Five AI-powered tools to help professionals write, plan, research, and
-          communicate faster — all in one clean workspace.
-        </p>
       </section>
 
-      <section className="mt-10">
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-          Tools
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <Link
-              key={f.href}
-              to={f.href}
-              className="group flex flex-col rounded-xl border bg-card p-5 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[var(--shadow-elegant)]"
+      <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {tiles.map((t) => (
+          <Link
+            key={t.href}
+            to={t.href}
+            className="group flex flex-col rounded-2xl border bg-card p-5 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:border-[var(--gold)] hover:shadow-[var(--shadow-elegant)]"
+          >
+            <div
+              className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl"
+              style={t.primary
+                ? { background: "var(--gradient-gold)", color: "var(--gold-foreground)" }
+                : { background: "var(--cream)", color: "var(--primary)" }}
             >
-              <div
-                className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg text-primary-foreground"
-                style={{ background: "var(--gradient-primary)" }}
-              >
-                <f.icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-base font-semibold tracking-tight">{f.title}</h3>
-              <p className="mt-1 flex-1 text-sm text-muted-foreground">{f.description}</p>
-              <div className="mt-4 flex items-center gap-1 text-xs font-medium text-primary">
-                Open <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </div>
-            </Link>
-          ))}
-        </div>
+              <t.icon className="h-5 w-5" />
+            </div>
+            <h3 className="text-base font-semibold tracking-tight">{t.title}</h3>
+            <p className="mt-1 flex-1 text-sm text-muted-foreground">{t.description}</p>
+            <div className="mt-4 flex items-center gap-1 text-xs font-medium text-foreground">
+              Open <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </div>
+          </Link>
+        ))}
       </section>
 
-      <section className="mt-10 flex items-start gap-3 rounded-xl border bg-muted/40 p-4 text-sm text-muted-foreground">
-        <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-        <p>
-          <span className="font-medium text-foreground">Responsible AI:</span> Outputs
-          are generated by AI and may contain errors, omissions, or bias. Always review,
-          edit, and verify before sending, sharing, or acting on results — especially for
-          sensitive topics or decisions involving people, finances, or compliance.
-        </p>
-      </section>
+      <ResponsibleAiNote className="mt-10" />
     </div>
   );
 }
