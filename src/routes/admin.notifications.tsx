@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Copy, Mail, MessageSquare, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -53,8 +53,7 @@ function AdminNotifications() {
   const generated = useMemo(() => buildMessage(tone, channel, appt), [tone, channel, appt]);
   const [text, setText] = useState(generated);
 
-  // Sync when controls change
-  useMemo(() => setText(generated), [generated]);
+  useEffect(() => { setText(generated); }, [generated]);
 
   const send = () => {
     setSending(true);
