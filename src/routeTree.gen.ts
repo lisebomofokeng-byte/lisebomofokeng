@@ -18,9 +18,11 @@ import { Route as EmailRouteImport } from './routes/email'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CapfinRouteImport } from './routes/capfin'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as AfribizRouteImport } from './routes/afribiz'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiCapfinChatRouteImport } from './routes/api/capfin-chat'
+import { Route as ApiAfribizChatRouteImport } from './routes/api/afribiz-chat'
 import { Route as AdminStylistsRouteImport } from './routes/admin.stylists'
 import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
 import { Route as AdminClientsRouteImport } from './routes/admin.clients'
@@ -71,6 +73,11 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AfribizRoute = AfribizRouteImport.update({
+  id: '/afribiz',
+  path: '/afribiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -84,6 +91,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
 const ApiCapfinChatRoute = ApiCapfinChatRouteImport.update({
   id: '/api/capfin-chat',
   path: '/api/capfin-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAfribizChatRoute = ApiAfribizChatRouteImport.update({
+  id: '/api/afribiz-chat',
+  path: '/api/afribiz-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminStylistsRoute = AdminStylistsRouteImport.update({
@@ -109,6 +121,7 @@ const AdminCalendarRoute = AdminCalendarRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/afribiz': typeof AfribizRoute
   '/book': typeof BookRoute
   '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
@@ -122,11 +135,13 @@ export interface FileRoutesByFullPath {
   '/admin/clients': typeof AdminClientsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/stylists': typeof AdminStylistsRoute
+  '/api/afribiz-chat': typeof ApiAfribizChatRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/afribiz': typeof AfribizRoute
   '/book': typeof BookRoute
   '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
@@ -140,12 +155,14 @@ export interface FileRoutesByTo {
   '/admin/clients': typeof AdminClientsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/stylists': typeof AdminStylistsRoute
+  '/api/afribiz-chat': typeof ApiAfribizChatRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/afribiz': typeof AfribizRoute
   '/book': typeof BookRoute
   '/capfin': typeof CapfinRoute
   '/chat': typeof ChatRoute
@@ -159,6 +176,7 @@ export interface FileRoutesById {
   '/admin/clients': typeof AdminClientsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/stylists': typeof AdminStylistsRoute
+  '/api/afribiz-chat': typeof ApiAfribizChatRoute
   '/api/capfin-chat': typeof ApiCapfinChatRoute
   '/api/chat': typeof ApiChatRoute
 }
@@ -166,6 +184,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/afribiz'
     | '/book'
     | '/capfin'
     | '/chat'
@@ -179,11 +198,13 @@ export interface FileRouteTypes {
     | '/admin/clients'
     | '/admin/notifications'
     | '/admin/stylists'
+    | '/api/afribiz-chat'
     | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/afribiz'
     | '/book'
     | '/capfin'
     | '/chat'
@@ -197,11 +218,13 @@ export interface FileRouteTypes {
     | '/admin/clients'
     | '/admin/notifications'
     | '/admin/stylists'
+    | '/api/afribiz-chat'
     | '/api/capfin-chat'
     | '/api/chat'
   id:
     | '__root__'
     | '/'
+    | '/afribiz'
     | '/book'
     | '/capfin'
     | '/chat'
@@ -215,12 +238,14 @@ export interface FileRouteTypes {
     | '/admin/clients'
     | '/admin/notifications'
     | '/admin/stylists'
+    | '/api/afribiz-chat'
     | '/api/capfin-chat'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AfribizRoute: typeof AfribizRoute
   BookRoute: typeof BookRoute
   CapfinRoute: typeof CapfinRoute
   ChatRoute: typeof ChatRoute
@@ -234,6 +259,7 @@ export interface RootRouteChildren {
   AdminClientsRoute: typeof AdminClientsRoute
   AdminNotificationsRoute: typeof AdminNotificationsRoute
   AdminStylistsRoute: typeof AdminStylistsRoute
+  ApiAfribizChatRoute: typeof ApiAfribizChatRoute
   ApiCapfinChatRoute: typeof ApiCapfinChatRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -303,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/afribiz': {
+      id: '/afribiz'
+      path: '/afribiz'
+      fullPath: '/afribiz'
+      preLoaderRoute: typeof AfribizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -322,6 +355,13 @@ declare module '@tanstack/react-router' {
       path: '/api/capfin-chat'
       fullPath: '/api/capfin-chat'
       preLoaderRoute: typeof ApiCapfinChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/afribiz-chat': {
+      id: '/api/afribiz-chat'
+      path: '/api/afribiz-chat'
+      fullPath: '/api/afribiz-chat'
+      preLoaderRoute: typeof ApiAfribizChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/stylists': {
@@ -357,6 +397,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AfribizRoute: AfribizRoute,
   BookRoute: BookRoute,
   CapfinRoute: CapfinRoute,
   ChatRoute: ChatRoute,
@@ -370,9 +411,20 @@ const rootRouteChildren: RootRouteChildren = {
   AdminClientsRoute: AdminClientsRoute,
   AdminNotificationsRoute: AdminNotificationsRoute,
   AdminStylistsRoute: AdminStylistsRoute,
+  ApiAfribizChatRoute: ApiAfribizChatRoute,
   ApiCapfinChatRoute: ApiCapfinChatRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
