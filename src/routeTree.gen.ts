@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TravelCuratorRouteImport } from './routes/travel-curator'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResearchRouteImport } from './routes/research'
@@ -26,6 +27,11 @@ import { Route as AdminNotificationsRouteImport } from './routes/admin.notificat
 import { Route as AdminClientsRouteImport } from './routes/admin.clients'
 import { Route as AdminCalendarRouteImport } from './routes/admin.calendar'
 
+const TravelCuratorRoute = TravelCuratorRouteImport.update({
+  id: '/travel-curator',
+  path: '/travel-curator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/research': typeof ResearchRoute
   '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/travel-curator': typeof TravelCuratorRoute
   '/admin/calendar': typeof AdminCalendarRoute
   '/admin/clients': typeof AdminClientsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchRoute
   '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/travel-curator': typeof TravelCuratorRoute
   '/admin/calendar': typeof AdminCalendarRoute
   '/admin/clients': typeof AdminClientsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/research': typeof ResearchRoute
   '/services': typeof ServicesRoute
   '/tasks': typeof TasksRoute
+  '/travel-curator': typeof TravelCuratorRoute
   '/admin/calendar': typeof AdminCalendarRoute
   '/admin/clients': typeof AdminClientsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
@@ -175,6 +184,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/services'
     | '/tasks'
+    | '/travel-curator'
     | '/admin/calendar'
     | '/admin/clients'
     | '/admin/notifications'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/services'
     | '/tasks'
+    | '/travel-curator'
     | '/admin/calendar'
     | '/admin/clients'
     | '/admin/notifications'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/services'
     | '/tasks'
+    | '/travel-curator'
     | '/admin/calendar'
     | '/admin/clients'
     | '/admin/notifications'
@@ -230,6 +242,7 @@ export interface RootRouteChildren {
   ResearchRoute: typeof ResearchRoute
   ServicesRoute: typeof ServicesRoute
   TasksRoute: typeof TasksRoute
+  TravelCuratorRoute: typeof TravelCuratorRoute
   AdminCalendarRoute: typeof AdminCalendarRoute
   AdminClientsRoute: typeof AdminClientsRoute
   AdminNotificationsRoute: typeof AdminNotificationsRoute
@@ -240,6 +253,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/travel-curator': {
+      id: '/travel-curator'
+      path: '/travel-curator'
+      fullPath: '/travel-curator'
+      preLoaderRoute: typeof TravelCuratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tasks': {
       id: '/tasks'
       path: '/tasks'
@@ -366,6 +386,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResearchRoute: ResearchRoute,
   ServicesRoute: ServicesRoute,
   TasksRoute: TasksRoute,
+  TravelCuratorRoute: TravelCuratorRoute,
   AdminCalendarRoute: AdminCalendarRoute,
   AdminClientsRoute: AdminClientsRoute,
   AdminNotificationsRoute: AdminNotificationsRoute,
@@ -376,3 +397,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
